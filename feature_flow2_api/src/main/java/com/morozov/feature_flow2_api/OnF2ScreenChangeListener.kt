@@ -1,6 +1,6 @@
 package com.morozov.feature_flow2_api
 
-interface OnScreenChangeListener {
+interface OnF2ScreenChangeListener {
 
     fun onScreen1()
 

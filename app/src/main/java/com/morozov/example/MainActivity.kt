@@ -2,12 +2,12 @@ package com.morozov.example
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProviders
 import com.morozov.feature_flow1_api.Flow1FeatureApi
-import com.morozov.feature_flow1_api.OnScreen1ClickListener
+import com.morozov.feature_flow1_api.OnF1ScreenChangeListener
 import com.morozov.feature_flow2_api.Flow2FeatureApi
-import com.morozov.feature_flow2_api.OnScreenChangeListener
+import com.morozov.feature_flow2_api.OnF2ScreenChangeListener
 import kotlinx.android.synthetic.main.activity_main.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -26,22 +26,26 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         flow1.setOnClickListener {
             clearBackStack()
-            flow1Api.flow1Starter().startScreen1(supportFragmentManager, R.id.contentMain, object : OnScreen1ClickListener {
-                override fun onScreenClicked(id: Int) {
-                    flow1Api.flow1Starter().startScreen2(supportFragmentManager, R.id.contentMain)
+            flow1Api.flow1Starter().start(supportFragmentManager, R.id.contentMain, object : OnF1ScreenChangeListener {
+                override fun onScreen1() {
+                    showBottomNav()
+                }
+
+                override fun onScreen2() {
+                    hideBottomNav()
                 }
             })
         }
 
         flow2.setOnClickListener {
             clearBackStack()
-            flow2Api.flow2Starter().start(supportFragmentManager, R.id.contentMain, object : OnScreenChangeListener {
+            flow2Api.flow2Starter().start(supportFragmentManager, R.id.contentMain, object : OnF2ScreenChangeListener {
                 override fun onScreen1() {
-                    Toast.makeText(applicationContext, "Screen 1 flow 2", Toast.LENGTH_SHORT).show()
+                    showBottomNav()
                 }
 
                 override fun onScreen2() {
-                    Toast.makeText(applicationContext, "Screen 2 flow 2", Toast.LENGTH_SHORT).show()
+                    hideBottomNav()
                 }
             })
         }
@@ -54,5 +58,13 @@ class MainActivity : AppCompatActivity(), KodeinAware {
             supportFragmentManager.popBackStack()
             i++
         }
+    }
+
+    private fun showBottomNav() {
+        linearBottomNav.visibility = View.VISIBLE
+    }
+
+    private fun hideBottomNav() {
+        linearBottomNav.visibility = View.GONE
     }
 }

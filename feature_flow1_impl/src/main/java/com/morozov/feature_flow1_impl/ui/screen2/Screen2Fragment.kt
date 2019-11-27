@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.morozov.feature_flow1_impl.R
+import com.morozov.feature_flow1_impl.ui.DataObject
 
 class Screen2Fragment: Fragment() {
 
@@ -15,5 +16,10 @@ class Screen2Fragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_screen2, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        DataObject.changeListener?.onScreen2()
     }
 }

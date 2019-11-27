@@ -4,6 +4,5 @@ import androidx.fragment.app.FragmentManager
 
 interface Flow1Starter {
 
-    fun startScreen1(manager: FragmentManager, container: Int, callback: OnScreen1ClickListener)
-    fun startScreen2(manager: FragmentManager, container: Int)
+    fun start(manager: FragmentManager, container: Int, callback: OnF1ScreenChangeListener)
 }
