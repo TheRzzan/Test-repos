@@ -13,6 +13,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
+//Some little changes
 class MainActivity : AppCompatActivity(), KodeinAware {
     override val kodein: Kodein = App.kodein
 
